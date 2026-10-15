@@ -1,16 +1,26 @@
 # RuleBot — Rule-Based AI Chatbot
 
-A transparent, deterministic chatbot built for **Project 1: Rule-Based AI Chatbot** in the DecodeLabs Artificial Intelligence Industrial Training Kit. The project now includes both the original Python command-line version and a responsive browser interface. It uses explicit rules—not a trained model or generative API.
+A transparent, deterministic chatbot built for **Project 1: Rule-Based AI Chatbot** in the DecodeLabs Artificial Intelligence Industrial Training Kit. The project includes the original Python command-line version and a responsive browser app. Both now use lightweight, fully local NLP helpers—not a trained model or generative API.
+
+## Local NLP capabilities
+
+- **Normalization:** lowercase text, punctuation cleanup, whitespace cleanup, and common contraction expansion (`what's` → `what is`).
+- **Synonyms and chat shorthand:** handles a small explicit map such as `hiya` → `hello`, `u` → `you`, and `thx` → `thanks`.
+- **Typo tolerance:** matches short intent phrases with Levenshtein edit-distance scoring while keeping short words and unrelated text from matching accidentally.
+- **Intent ranking:** longer, more specific matching phrases can win when a message contains more than one intent (for example, a greeting plus a joke request).
+- **Temporal phrasing:** recognizes natural date/time variants and formats results with the local clock available to the CLI or browser.
+
+This is deliberately bounded local NLP. Messages are not sent to a model or external API; the bot does not understand arbitrary topics beyond its phrase lexicon.
 
 ## Rubric coverage
 
 | Project criterion | Implementation |
 | --- | --- |
-| Handle greetings | Recognizes hello/hi/hey and time-of-day greetings, case-insensitively. |
+| Handle greetings | Recognizes greetings, time-of-day greetings, common synonyms, and small spelling errors. |
 | Handle exit commands | `bye`, `goodbye`, `exit`, `quit`, `stop`, and `see you` produce a farewell and end the conversation. |
-| Use if/else logic | The Python and browser intent routers use ordered `if`/`elif`/`else` decisions. |
+| Use if/else logic | The Python and browser intent routers use explicit deterministic decision branches. |
 | Run continuously | The Python CLI loops until an exit command, EOF, or Ctrl+C. The web interface accepts repeated messages until the user ends or restarts the conversation. |
-| Sanitize input | Lowercases, normalizes punctuation, trims, and collapses whitespace before matching. |
+| Sanitize input | Expands selected contractions, canonicalizes synonyms, normalizes punctuation and whitespace, then scores token-boundary phrase matches. |
 | Knowledge base with 5+ intents | Dictionary-driven knowledge base includes greeting, help, identity, time, date, joke, thanks, and farewell. |
 | Fallback for unknown input | Unmatched and empty inputs receive a helpful default response. |
 | Clean exit | The CLI exits on an exit command; the browser UI closes the active conversation and offers a new-chat action. |
@@ -56,7 +66,7 @@ npm --prefix web test
 
 ## Render static-site settings
 
-The web interface can be hosted on Render as a free static site, using the private GitHub repo's `main` branch:
+The browser interface is hosted on Render as a free static site, using the private GitHub repo's `main` branch:
 
 - Build command: `npm --prefix web test`
 - Publish directory: `web`
@@ -73,7 +83,7 @@ rule_based_ai_chatbot/
 ├── rule_based_ai_chatbot/
 │   ├── __init__.py
 │   ├── __main__.py
-│   ├── chatbot.py       # Python knowledge base, rules, and normalization
+│   ├── chatbot.py       # Python knowledge base, local NLP, and rules
 │   └── cli.py           # Continuous terminal conversation loop
 ├── tests/
 │   └── test_chatbot.py  # Python unit and loop tests
@@ -81,14 +91,15 @@ rule_based_ai_chatbot/
     ├── index.html       # Accessible browser interface
     ├── styles.css       # Responsive visual design
     ├── app.js           # Conversation UI and controls
-    ├── bot.js           # Browser-side deterministic intent rules
-    ├── bot.test.js      # Node.js tests for browser rules
+    ├── bot.js           # Browser-side local NLP and deterministic rules
+    ├── bot.test.js      # Node.js tests for browser behavior
     └── package.json     # Dependency-free test command
 ```
 
 ## Engineering notes
 
-- **Explainability:** rules are ordered and the matched intent is visible in each browser response.
+- **Explainability:** rule phrases, token aliases, typo thresholds, and the winning intent are inspectable in source.
 - **Reliability:** Python date/time responses use an injectable clock; the JS rule engine accepts a test date too.
-- **Efficiency:** phrase checks are simple and auditable for this small fixed rule set. For a much larger rule base, use an indexed matcher.
-- **Scope:** RuleBot only understands predefined phrases. It does not learn or reason beyond the implemented rules.
+- **Efficiency:** edit-distance work is limited to short tokens and a small fixed phrase set.
+- **Privacy:** no model, API key, or network service is used to process messages.
+- **Scope:** this is local lexical NLP, not open-domain semantic reasoning. Add a trained model or LLM only if broader answers are required and the additional hosting/API trade-offs are acceptable.

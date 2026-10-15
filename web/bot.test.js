@@ -2,8 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { FALLBACK_RESPONSE, KNOWLEDGE_BASE, normalizeText, respond } from "./bot.js";
 
-test("normalizes case, punctuation, and repeated whitespace", () => {
+test("normalizes case, punctuation, contractions, and repeated whitespace", () => {
   assert.equal(normalizeText("  HELLO,   there!!  "), "hello there");
+  assert.equal(normalizeText("What’s today’s date?"), "what is todays date");
 });
 
 test("provides a dictionary knowledge base with eight intents", () => {
@@ -22,6 +23,19 @@ test("matches all predefined response categories", () => {
   assert.equal(respond("today's date", new Date("2026-10-15T18:12:08Z")).intent, "date");
   assert.equal(respond("tell me a joke").intent, "joke");
   assert.equal(respond("thank you").intent, "thanks");
+});
+
+test("tolerates typos, contractions, and common chat synonyms", () => {
+  assert.equal(respond("helo!").intent, "greeting");
+  assert.equal(respond("wht can u do?").intent, "help");
+  assert.equal(respond("thx!").intent, "thanks");
+  assert.equal(respond("Todai").intent, "date");
+});
+
+test("understands varied date/time questions and selects the strongest intent", () => {
+  assert.equal(respond("What's the time right now?").intent, "time");
+  assert.equal(respond("What's today's date?").intent, "date");
+  assert.equal(respond("hey, can you tell a joke?").intent, "joke");
 });
 
 test("exit commands request a clean end; mentions in a sentence do not", () => {

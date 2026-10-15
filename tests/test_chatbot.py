@@ -29,6 +29,19 @@ class RuleBasedChatbotTests(unittest.TestCase):
         self.assertEqual(self.bot.respond("help").intent, "help")
         self.assertEqual(self.bot.respond("Who are you?").intent, "identity")
 
+    def test_tolerates_common_typos_and_chat_synonyms(self):
+        self.assertEqual(self.bot.respond("helo!").intent, "greeting")
+        self.assertEqual(self.bot.respond("wht can u do?").intent, "help")
+        self.assertEqual(self.bot.respond("thx!").intent, "thanks")
+
+    def test_understands_contractions_and_richer_date_time_phrasing(self):
+        self.assertEqual(self.bot.respond("What's the time right now?").intent, "time")
+        self.assertEqual(self.bot.respond("What's today's date?").intent, "date")
+        self.assertEqual(self.bot.respond("Todai").intent, "date")
+
+    def test_specific_intent_outweighs_a_greeting_in_one_message(self):
+        self.assertEqual(self.bot.respond("hey, can you tell a joke?").intent, "joke")
+
     def test_joke_and_thanks(self):
         self.assertEqual(self.bot.respond("Tell me a joke").intent, "joke")
         self.assertEqual(self.bot.respond("Thank you!").intent, "thanks")
