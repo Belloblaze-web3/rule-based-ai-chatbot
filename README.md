@@ -1,78 +1,96 @@
-# RuleBot — Rule-Based AI Chatbot
+# RuleBot
 
-A transparent, deterministic chatbot built for **Project 1: Rule-Based AI Chatbot** in the DecodeLabs Artificial Intelligence Industrial Training Kit. The project includes the original Python command-line version and a responsive browser app. Both now use lightweight, fully local NLP helpers—not a trained model or generative API.
+**A transparent, deterministic chatbot built with Python and browser-native JavaScript.**
 
-## Local NLP capabilities
+RuleBot began as DecodeLabs AI Industrial Training Kit **Project 1: Rule-Based AI Chatbot**. It has grown into a Python command-line application and a responsive, static web app, with a lightweight local NLP layer for more flexible intent matching.
 
-- **Normalization:** lowercase text, punctuation cleanup, whitespace cleanup, and common contraction expansion (`what's` → `what is`).
-- **Synonyms and chat shorthand:** handles a small explicit map such as `hiya` → `hello`, `u` → `you`, and `thx` → `thanks`.
-- **Typo tolerance:** matches short intent phrases with Levenshtein edit-distance scoring while keeping short words and unrelated text from matching accidentally.
-- **Intent ranking:** longer, more specific matching phrases can win when a message contains more than one intent (for example, a greeting plus a joke request).
-- **Temporal phrasing:** recognizes natural date/time variants and formats results with the local clock available to the CLI or browser.
+[**Try RuleBot live**](https://rulebot-chat.onrender.com) · [**View the GitHub repository**](https://github.com/Belloblaze-web3/rule-based-ai-chatbot)
 
-This is deliberately bounded local NLP. Messages are not sent to a model or external API; the bot does not understand arbitrary topics beyond its phrase lexicon.
+> RuleBot does not use a trained language model or call an LLM API. Its behavior is driven by explicit, inspectable rules; messages in the web app are processed in the browser.
 
-## Rubric coverage
+## Highlights
 
-| Project criterion | Implementation |
-| --- | --- |
-| Handle greetings | Recognizes greetings, time-of-day greetings, common synonyms, and small spelling errors. |
-| Handle exit commands | `bye`, `goodbye`, `exit`, `quit`, `stop`, and `see you` produce a farewell and end the conversation. |
-| Use if/else logic | The Python and browser intent routers use explicit deterministic decision branches. |
-| Run continuously | The Python CLI loops until an exit command, EOF, or Ctrl+C. The web interface accepts repeated messages until the user ends or restarts the conversation. |
-| Sanitize input | Expands selected contractions, canonicalizes synonyms, normalizes punctuation and whitespace, then scores token-boundary phrase matches. |
-| Knowledge base with 5+ intents | Dictionary-driven knowledge base includes greeting, help, identity, time, date, joke, thanks, and farewell. |
-| Fallback for unknown input | Unmatched and empty inputs receive a helpful default response. |
-| Clean exit | The CLI exits on an exit command; the browser UI closes the active conversation and offers a new-chat action. |
+- **Eight intent groups:** greetings, help, identity, time, date, jokes, thanks, and farewell.
+- **Local NLP helpers:** text normalization, selected contraction expansion, synonym and chat-shorthand mapping, typo-tolerant phrase matching, and intent ranking.
+- **Two interfaces:** a continuous Python CLI and an accessible, responsive browser chat.
+- **Predictable behavior:** explicit intent rules, helpful fallback responses, and clean conversation exits.
+- **No runtime dependencies for the web app:** static HTML, CSS, and JavaScript; no server-side chat API or database.
 
-## Python CLI
+## Try the web app
 
-Requirements: Python 3.10 or newer. No third-party dependencies.
+Open the [live RuleBot site](https://rulebot-chat.onrender.com), or run the static app locally with Python:
+
+```bash
+python -m http.server 8000 --directory web
+```
+
+Then visit <http://localhost:8000>. Try prompts such as `What can you do?`, `wht can u do?`, `What's today's date?`, or `tell a joke`.
+
+## Run the Python chatbot
+
+**Requirements:** Python 3.10 or newer. The CLI uses only the Python standard library.
+
+From the repository root:
 
 ```bash
 python -m rule_based_ai_chatbot
 ```
 
-To install the console command:
+To install the package and its console command in editable mode:
 
 ```bash
 python -m pip install -e .
 rule-chatbot
 ```
 
-## Browser app
+The CLI continues until an exit command such as `bye`, `goodbye`, `exit`, `quit`, `stop`, or `see you`, or until the input stream ends.
 
-The static browser interface is in `web/`. It needs no server-side code, API key, or JavaScript dependencies. To run it locally:
+## How the local NLP works
 
-```bash
-python -m http.server 8000 --directory web
-```
+Both implementations follow the same explainable intent-matching approach:
 
-Then open `http://localhost:8000`. Chats are held only in the current browser tab and are not sent to a backend.
+1. **Normalize:** lowercase text, clean punctuation and whitespace, and expand selected contractions.
+2. **Canonicalize:** map explicitly listed shorthand and synonyms to common forms.
+3. **Match:** compare short token windows against the phrase lexicon, using Levenshtein edit distance for limited typo tolerance.
+4. **Choose:** select the strongest matching intent; use a helpful fallback when no rule fits.
+5. **Respond:** return a fixed response or compute the current local date/time.
 
-## Tests
+For example, `thx` is mapped to `thanks`; a typo such as `helo` can still match a greeting; and a specific request such as “hey, tell a joke” is ranked above the greeting. Short tokens remain protected from broad fuzzy matching to reduce accidental matches.
 
-Python tests:
+This is **bounded lexical NLP**, not open-domain semantic understanding. It does not learn from conversations or answer arbitrary questions. To teach RuleBot new behavior, extend its phrase lexicon and responses, then add regression tests for the new examples.
+
+## Test the project
+
+Run the Python unit tests:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-Browser-rule tests (Node.js 18+):
+Run the browser intent-engine tests (**Node.js 18 or newer**):
 
 ```bash
 npm --prefix web test
 ```
 
-## Render static-site settings
+The test suites cover normalization, intent matching, synonyms and typos, date/time responses, fallback handling, exit commands, and the CLI conversation loop.
 
-The browser interface is hosted on Render as a free static site, using the private GitHub repo's `main` branch:
+## Deploy the static site
 
-- Build command: `npm --prefix web test`
-- Publish directory: `web`
-- No environment variables or backend service are required
+The browser app is deployed as a Render static site. Its configuration is:
 
-Static hosting avoids a backend cold start. The public website contains no user account or server-side chat storage; the GitHub source repository remains private.
+| Setting | Value |
+| --- | --- |
+| Branch | `main` |
+| Build command | `npm --prefix web test` |
+| Publish directory | `web` |
+| Environment variables | None required |
+
+The site can be served by any static host. The Python CLI is not part of the browser deployment; the chat itself needs no backend service.
+
+## Privacy and limitations
+
+The static app processes chat messages in the user's browser tab and does not send them to an LLM, API, or RuleBot server. It has no user accounts or server-side conversation history. The public demo is intended for showcasing the project, not for handling sensitive information.
 
 ## Project structure
 
@@ -83,23 +101,19 @@ rule_based_ai_chatbot/
 ├── rule_based_ai_chatbot/
 │   ├── __init__.py
 │   ├── __main__.py
-│   ├── chatbot.py       # Python knowledge base, local NLP, and rules
-│   └── cli.py           # Continuous terminal conversation loop
+│   ├── chatbot.py       # Python intent lexicon, local NLP, and response rules
+│   └── cli.py           # Continuous terminal chat loop
 ├── tests/
-│   └── test_chatbot.py  # Python unit and loop tests
+│   └── test_chatbot.py  # Python unit and CLI loop tests
 └── web/
-    ├── index.html       # Accessible browser interface
-    ├── styles.css       # Responsive visual design
-    ├── app.js           # Conversation UI and controls
-    ├── bot.js           # Browser-side local NLP and deterministic rules
-    ├── bot.test.js      # Node.js tests for browser behavior
+    ├── index.html       # Browser app markup
+    ├── styles.css       # Responsive interface styles
+    ├── app.js           # Browser chat interactions
+    ├── bot.js           # Browser-side NLP and intent engine
+    ├── bot.test.js      # Node.js intent-engine tests
     └── package.json     # Dependency-free test command
 ```
 
-## Engineering notes
+## Project context
 
-- **Explainability:** rule phrases, token aliases, typo thresholds, and the winning intent are inspectable in source.
-- **Reliability:** Python date/time responses use an injectable clock; the JS rule engine accepts a test date too.
-- **Efficiency:** edit-distance work is limited to short tokens and a small fixed phrase set.
-- **Privacy:** no model, API key, or network service is used to process messages.
-- **Scope:** this is local lexical NLP, not open-domain semantic reasoning. Add a trained model or LLM only if broader answers are required and the additional hosting/API trade-offs are acceptable.
+RuleBot was created for **Project 1: Rule-Based AI Chatbot** in the DecodeLabs Artificial Intelligence Industrial Training Kit. The project emphasizes foundational AI engineering: clear requirements, input preprocessing, intent classification, deterministic control flow, testing, and deployment.
