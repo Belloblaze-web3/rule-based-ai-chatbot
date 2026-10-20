@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container {
+      width: 1280px;
+      min-height: 720px;
+      background: #18181B;
+      display: flex;
+      flex-direction: column;
+      padding: 60px;
+      color: #F4F4F5;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .motif {
+      position: absolute;
+      top: 60px;
+      right: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #A1A1AA;
+    }
+    .motif span { color: #0D9488; }
+    h2 { font-size: 36px; font-weight: 700; margin-bottom: 34px; }
+    .columns {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: 55px;
+      align-items: center;
+      padding-top: 10px;
+    }
+    .column-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #0D9488;
+      margin-bottom: 22px;
+      display: block;
+    }
+    .feature {
+      border-bottom: 1px solid #3F3F46;
+      padding: 0 0 18px 0;
+      margin-bottom: 18px;
+    }
+    .feature:last-child { border-bottom: none; }
+    .feature h3 { font-size: 21px; margin-bottom: 7px; }
+    .feature p { font-size: 18px; color: #A1A1AA; line-height: 1.45; }
+    .demo {
+      background: #111113;
+      border: 1px solid #3F3F46;
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .demo-head {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #3F3F46;
+      padding-bottom: 18px;
+      margin-bottom: 22px;
+      align-items: center;
+    }
+    .brand { font-size: 22px; font-weight: 700; }
+    .status {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: #0D9488;
+    }
+    .bubble-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: #A1A1AA;
+      margin: 13px 0 7px;
+    }
+    .bubble {
+      font-size: 18px;
+      line-height: 1.45;
+      border-radius: 8px;
+      padding: 14px 16px;
+      max-width: 90%;
+    }
+    .user {
+      margin-left: auto;
+      background: #164E4A;
+      color: #F4F4F5;
+    }
+    .bot { background: #27272A; color: #F4F4F5; }
+    .intent {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: #0D9488;
+      margin-top: 18px;
+    }
+    .caption { font-size: 14px; color: #A1A1AA; margin-top: 16px; }
+    .footer {
+      font-size: 14px;
+      color: #A1A1AA;
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="motif"><span>[</span> input → intent → <span style="color: #0D9488;">response</span> <span>]</span></div>
+    <h2>From CLI to a browser experience</h2>
+    <div class="columns">
+      <div>
+        <span class="column-title">// Product decisions</span>
+        <div class="feature">
+          <h3>Two ways to run it</h3>
+          <p>A standard-library Python CLI for terminal use, plus a responsive static web app.</p>
+        </div>
+        <div class="feature">
+          <h3>Built for repeated turns</h3>
+          <p>Quick prompts make supported intents discoverable; new chat restarts the conversation after a clean exit.</p>
+        </div>
+        <div class="feature">
+          <h3>Client-side by design</h3>
+          <p>The browser app can run on static hosting without a chatbot backend or server-side conversation store.</p>
+        </div>
+      </div>
+      <div>
+        <span class="column-title">// Example interaction</span>
+        <div class="demo">
+          <div class="demo-head">
+            <span class="brand">RuleBot</span>
+            <span class="status">● ONLINE · RULE-BASED</span>
+          </div>
+          <div class="bubble-label">YOU</div>
+          <div class="bubble user">wht can u do?</div>
+          <div class="bubble-label">RULEBOT</div>
+          <div class="bubble bot">I can chat, tell you the date or time, share a joke, and explain what I can do.</div>
+          <div class="intent">MATCHED INTENT: HELP</div>
+          <div class="caption">Illustrative example from the local intent engine.</div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <span>DEPLOYED ON RENDER · LIVE WEB APP</span>
+      <span>04 / 07</span>
+    </div>
+  </div>
+</body>
+</html>

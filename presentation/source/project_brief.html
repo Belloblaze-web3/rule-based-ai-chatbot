@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #18181B; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 60px;
+      color: #F4F4F5;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .motif {
+      position: absolute;
+      top: 60px;
+      right: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #A1A1AA;
+    }
+    .motif .active { color: #0D9488; }
+    
+    h2 { font-size: 36px; font-weight: 700; margin-bottom: 40px; }
+    
+    .columns {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      padding-top: 20px;
+    }
+    
+    .column-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #0D9488;
+      margin-bottom: 20px;
+      display: block;
+    }
+    
+    p { font-size: 20px; line-height: 1.6; color: #F4F4F5; margin-bottom: 24px; }
+    
+    ul { list-style: none; }
+    li {
+      font-size: 20px;
+      margin-bottom: 20px;
+      padding-left: 30px;
+      position: relative;
+      line-height: 1.4;
+    }
+    li::before {
+      content: ">";
+      position: absolute;
+      left: 0;
+      color: #0D9488;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }
+    li strong { color: #F4F4F5; display: block; }
+    li small { color: #A1A1AA; font-size: 16px; }
+    
+    .footer {
+      font-size: 14px;
+      color: #A1A1AA;
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="motif"><span>[</span> <span class="active">input</span> → intent → response <span>]</span></div>
+    
+    <h2>Start with a clear, testable brief</h2>
+    
+    <div class="columns">
+      <div class="left-col">
+        <span class="column-title">// The Objective</span>
+        <p>Build a transparent AI chatbot that relies on explicit rules rather than generative models. The goal was to master the "foundations of AI": input sanitization, intent classification, and deterministic state management.</p>
+        <p>Every response must be explainable, repeatable, and delivered through a continuous conversational loop.</p>
+      </div>
+      
+      <div class="right-col">
+        <span class="column-title">// Scope & Requirements</span>
+        <ul>
+          <li><strong>Eight Intent Groups</strong><small>Greetings, help, identity, time, date, joke, thanks, and farewell.</small></li>
+          <li><strong>Continuous Lifecycle</strong><small>Looping chat interface with clean exit commands (exit, quit, bye).</small></li>
+          <li><strong>Input Discipline</strong><small>Normalization of case, punctuation, and whitespace before matching.</small></li>
+          <li><strong>Safe Fallbacks</strong><small>Graceful handling of empty or unknown inputs without crashing.</small></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <span>AI ENGINEERING · PROJECT 01</span>
+      <span>02 / 07</span>
+    </div>
+  </div>
+</body>
+</html>

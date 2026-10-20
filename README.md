@@ -114,6 +114,10 @@ rule_based_ai_chatbot/
     └── package.json     # Dependency-free test command
 ```
 
+## Presentation
+
+The seven-slide project walkthrough is available as a [PDF](presentation/RuleBot-DecodeLabs-Project-1.pdf). Editable HTML slide sources are in [`presentation/source/`](presentation/source/), with the 16:9 cover image in [`presentation/assets/`](presentation/assets/).
+
 ## Project context
 
 RuleBot was created for **Project 1: Rule-Based AI Chatbot** in the DecodeLabs Artificial Intelligence Industrial Training Kit. The project emphasizes foundational AI engineering: clear requirements, input preprocessing, intent classification, deterministic control flow, testing, and deployment.

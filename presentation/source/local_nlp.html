@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #18181B; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 60px;
+      color: #F4F4F5;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .motif {
+      position: absolute;
+      top: 60px;
+      right: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #A1A1AA;
+    }
+    .motif span { color: #0D9488; }
+    
+    h2 { font-size: 36px; font-weight: 700; margin-bottom: 30px; }
+    
+    .intro { font-size: 20px; color: #A1A1AA; margin-bottom: 40px; max-width: 800px; line-height: 1.5; }
+    
+    .table-container {
+      background: #27272A;
+      border: 1px solid #3F3F46;
+      border-radius: 8px;
+      padding: 0;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+    }
+    
+    th {
+      text-align: left;
+      background: #18181B;
+      color: #0D9488;
+      padding: 16px 24px;
+      border-bottom: 1px solid #3F3F46;
+      font-weight: 400;
+    }
+    
+    td {
+      padding: 16px 24px;
+      border-bottom: 1px solid #3F3F46;
+      color: #F4F4F5;
+    }
+    
+    tr:last-child td { border-bottom: none; }
+    
+    .match { color: #0D9488; font-weight: 700; }
+    .meta { color: #A1A1AA; }
+    
+    .footer {
+      font-size: 14px;
+      color: #A1A1AA;
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="motif"><span>[</span> input → <span style="color: #0D9488;">intent</span> → response <span>]</span></div>
+    
+    <h2>More tolerant language—without an API</h2>
+    <p class="intro">RuleBot upgrades basic exact-string matching with a local NLP layer. It uses Levenshtein distance for typo tolerance and token mapping for common chat shorthand.</p>
+    
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>User Input</th>
+            <th>Normalization & Synonyms</th>
+            <th>Scored Intent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>"wht's today's date?"</td>
+            <td class="meta">what is today's date</td>
+            <td class="match">date (score: 4)</td>
+          </tr>
+          <tr>
+            <td>"thx, crack a joke"</td>
+            <td class="meta">thanks, crack a joke</td>
+            <td class="match">joke (score: 6)</td>
+          </tr>
+          <tr>
+            <td>"helo, tel time"</td>
+            <td class="meta">hello, tell time</td>
+            <td class="match">time (score: 4)</td>
+          </tr>
+          <tr>
+            <td>"hiya! whos rulebot?"</td>
+            <td class="meta">hello who is rulebot</td>
+            <td class="match">identity (score: 4)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="footer">
+      <span>FUZZY MATCHING · DETERMINISTIC SCORING</span>
+      <span>05 / 07</span>
+    </div>
+  </div>
+</body>
+</html>

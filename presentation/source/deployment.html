@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #18181B; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 60px;
+      color: #F4F4F5;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .motif {
+      position: absolute;
+      top: 60px;
+      right: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #A1A1AA;
+    }
+    .motif span { color: #0D9488; }
+    
+    h2 { font-size: 36px; font-weight: 700; margin-bottom: 40px; }
+    
+    .columns {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 60px;
+      padding-top: 20px;
+    }
+    
+    .column-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #0D9488;
+      margin-bottom: 20px;
+      display: block;
+    }
+    
+    p { font-size: 20px; line-height: 1.6; color: #F4F4F5; margin-bottom: 24px; }
+    
+    .stack-list { list-style: none; }
+    .stack-item {
+      background: #27272A;
+      border: 1px solid #3F3F46;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .stack-item span { color: #0D9488; font-size: 14px; opacity: 0.7; }
+    
+    .arch-box {
+      background: #27272A;
+      border: 1px solid #3F3F46;
+      border-radius: 8px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+    
+    .arch-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; text-align: center; }
+    
+    .exit-code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 36px;
+      color: #0D9488;
+      margin-top: 20px;
+    }
+    
+    .footer {
+      font-size: 14px;
+      color: #A1A1AA;
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="motif"><span>[</span> input → intent → response <span>]</span></div>
+    
+    <h2>Ship simply. Learn deliberately.</h2>
+    
+    <div class="columns">
+      <div class="left-col">
+        <span class="column-title">// Project Architecture</span>
+        <div class="stack-list">
+          <div class="stack-item">Private GitHub Repo <span>Source</span></div>
+          <div class="stack-item">Render Static Site <span>Host</span></div>
+          <div class="stack-item">Custom NLP Lib <span>Logic</span></div>
+          <div class="stack-item">Automated CI/CD <span>Pipeline</span></div>
+        </div>
+        <p style="margin-top: 30px;">RuleBot demonstrates that a production-ready project is about the whole lifecycle: from clean code and local testing to secure hosting and responsive design.</p>
+      </div>
+      
+      <div class="right-col">
+        <div class="arch-box">
+          <div class="arch-title">Project Status</div>
+          <div style="font-size: 60px; margin-bottom: 20px;">✓</div>
+          <p style="text-align: center; color: #A1A1AA;">All requirements met.<br>Tests passing.<br>Deployed.</p>
+          <div class="exit-code">return 0;</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <span>DECODELABS AI KIT · PROJECT 01 COMPLETE</span>
+      <span>07 / 07</span>
+    </div>
+  </div>
+</body>
+</html>

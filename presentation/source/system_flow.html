@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #18181B; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 60px;
+      color: #F4F4F5;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .motif {
+      position: absolute;
+      top: 60px;
+      right: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #A1A1AA;
+    }
+    .motif span { color: #0D9488; }
+    
+    h2 { font-size: 36px; font-weight: 700; margin-bottom: 80px; }
+    
+    .pipeline {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      margin-top: 40px;
+    }
+    
+    .node {
+      width: 240px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .node-box {
+      background: #27272A;
+      border: 1px solid #3F3F46;
+      border-radius: 8px;
+      padding: 30px 20px;
+      margin-bottom: 20px;
+    }
+    
+    .node-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #0D9488;
+      margin-bottom: 12px;
+      display: block;
+    }
+    
+    .node-desc {
+      font-size: 16px;
+      color: #F4F4F5;
+      line-height: 1.4;
+    }
+    
+    .arrow {
+      flex: 1;
+      height: 2px;
+      background: #3F3F46;
+      margin: 0 20px;
+      position: relative;
+      margin-bottom: 80px;
+    }
+    
+    .arrow::after {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: -9px;
+      width: 20px;
+      height: 20px;
+      border-top: 2px solid #0D9488;
+      border-right: 2px solid #0D9488;
+      transform: rotate(45deg);
+    }
+    
+    .footer {
+      font-size: 14px;
+      color: #A1A1AA;
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="motif"><span>[</span> input → intent → response <span>]</span></div>
+    
+    <h2>A transparent pipeline, end to end</h2>
+    
+    <div class="pipeline">
+      <div class="node">
+        <div class="node-box">
+          <span class="node-label">SANITIZE</span>
+          <p class="node-desc">Normalize case, punctuation, and whitespace.</p>
+        </div>
+      </div>
+      
+      <div class="arrow"></div>
+      
+      <div class="node">
+        <div class="node-box">
+          <span class="node-label">EXPAND</span>
+          <p class="node-desc">Canonicalize synonyms and chat shorthand.</p>
+        </div>
+      </div>
+      
+      <div class="arrow"></div>
+      
+      <div class="node">
+        <div class="node-box">
+          <span class="node-label">CLASSIFY</span>
+          <p class="node-desc">Score intent phrases with typo tolerance.</p>
+        </div>
+      </div>
+      
+      <div class="arrow"></div>
+      
+      <div class="node">
+        <div class="node-box" style="border-color: #0D9488;">
+          <span class="node-label">RESPOND</span>
+          <p class="node-desc">Return intent match or helpful fallback.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <span>AI ENGINEERING · PROJECT 01</span>
+      <span>03 / 07</span>
+    </div>
+  </div>
+</body>
+</html>

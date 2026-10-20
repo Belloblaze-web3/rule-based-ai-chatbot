@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .slide-container { 
+      width: 1280px; 
+      min-height: 720px; 
+      background: #18181B; 
+      display: flex; 
+      flex-direction: column; 
+      padding: 60px;
+      color: #F4F4F5;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .motif {
+      position: absolute;
+      top: 60px;
+      right: 60px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 18px;
+      color: #A1A1AA;
+    }
+    .motif span { color: #0D9488; }
+    
+    h2 { font-size: 36px; font-weight: 700; margin-bottom: 40px; }
+    
+    .grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 30px;
+      padding-bottom: 20px;
+    }
+    
+    .card {
+      background: #27272A;
+      border: 1px solid #3F3F46;
+      border-radius: 8px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .card-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 16px;
+      color: #0D9488;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+    }
+    
+    h3 { font-size: 24px; font-weight: 700; margin-bottom: 16px; }
+    p { font-size: 18px; color: #A1A1AA; line-height: 1.5; }
+    
+    .footer {
+      font-size: 14px;
+      color: #A1A1AA;
+      display: flex;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="slide-container">
+    <div class="motif"><span>[</span> input → intent → response <span>]</span></div>
+    
+    <h2>Built to be explainable and testable</h2>
+    
+    <div class="grid">
+      <div class="card">
+        <span class="card-label">01 / Explicit Rules</span>
+        <h3>Lexical Knowledge Base</h3>
+        <p>A dictionary-driven intent map stores eight distinct categories. Every response is tied to an auditable rule rather than a black-box weights file.</p>
+      </div>
+      
+      <div class="card">
+        <span class="card-label">02 / Dynamic State</span>
+        <h3>Injectable Real-Time</h3>
+        <p>Date and time handlers use an injectable clock, allowing precise regression testing of time-dependent responses without waiting for reality.</p>
+      </div>
+      
+      <div class="card">
+        <span class="card-label">03 / Reliability</span>
+        <h3>Regression Suites</h3>
+        <p>14 Python unit tests and 8 browser-side Node.js tests cover normalization, exit triggers, fallback safety, and intent precedence.</p>
+      </div>
+      
+      <div class="card">
+        <span class="card-label">04 / Control Flow</span>
+        <h3>Safe Exits</h3>
+        <p>Exit commands are recognized as high-priority full commands. Both environments provide a graceful teardown and session restart.</p>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <span>PYTEST + NODE.JS · 100% EXPLAINABLE</span>
+      <span>06 / 07</span>
+    </div>
+  </div>
+</body>
+</html>
